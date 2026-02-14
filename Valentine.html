@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HAPPY VALENTINE'S DAY❤️</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Segoe UI, Arial;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  overflow:hidden;
+  background:linear-gradient(120deg,#ff758c,#ff7eb3,#7afcff);
+  background-size:300% 300%;
+  animation:bgMove 12s ease infinite;
+}
+
+@keyframes bgMove{
+  0%{background-position:0%}
+  50%{background-position:100%}
+  100%{background-position:0%}
+}
+
+/* Card */
+.card{
+  width:92%;
+  max-width:420px;
+  padding:28px;
+  border-radius:20px;
+  text-align:center;
+  color:white;
+  backdrop-filter:blur(15px);
+  background:rgba(255,255,255,0.15);
+  box-shadow:0 20px 45px rgba(0,0,0,0.25);
+}
+
+.profile{
+  width:130px;
+  height:130px;
+  border-radius:50%;
+  border:3px solid white;
+  object-fit:cover;
+}
+
+button{
+  width:90%;
+  padding:12px;
+  margin-top:10px;
+  border:none;
+  border-radius:12px;
+  font-size:15px;
+  cursor:pointer;
+  background:white;
+  color:#333;
+}
+
+button:hover{ transform:translateY(-2px); }
+
+/* Heart */
+.bigHeart{
+  position:absolute;
+  left:50%;
+  bottom:90px;
+  transform:translateX(-50%) scale(.5);
+  opacity:0;
+  font-size:200px;
+  animation:heartGlow 2s ease forwards;
+}
+
+@keyframes heartGlow{
+  40%{opacity:1;}
+  100%{
+    transform:translateX(-50%) translateY(-220px) scale(1.5);
+    opacity:0;
+  }
+}
+
+/* Popup */
+.popup{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.6);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  visibility:hidden;
+}
+
+.box{
+  background:white;
+  color:#333;
+  padding:20px;
+  border-radius:12px;
+  width:80%;
+  max-width:300px;
+  text-align:center;
+}
+
+/* Gift shake */
+.shake{
+  font-size:60px;
+  animation:shake .4s infinite alternate;
+}
+
+@keyframes shake{
+  from{transform:rotate(-10deg);}
+  to{transform:rotate(10deg);}
+}
+
+/* Explosion particles */
+.spark{
+  position:absolute;
+  font-size:18px;
+  animation:explode 1s linear forwards;
+}
+
+@keyframes explode{
+  to{
+    transform:translate(var(--x),var(--y));
+    opacity:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<img class="profile"
+src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbgo2okOPlv5pKmGBNwfxLw7wQ2FuQK3YP1iSb8fnJgw&s=10">
+
+<h2>❤️🌹HAPPY VALENTINE'S DAY MELIDAH🌹❤️</h2>
+
+<p>
+WITHIN A SHORT PERIOD OF TIME, I'VE GOTTEN USED TO YOU LIKE YOU ALWAYS EXISTED ,,,I LOVE YOU ❤️❤️🌹
+</p>
+
+<button onclick="showHeart()">Send Love Back ❤️</button>
+<button onclick="returnGift()">🎁 open gift</button>
+
+</div>
+
+<div class="popup" id="popup">
+  <div class="box" id="popupText"></div>
+</div>
+
+<script>
+function showHeart(){
+  let heart=document.createElement("div");
+  heart.className="bigHeart";
+  heart.innerText="❤️";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),2000);
+}
+
+/* Gift prank */
+function returnGift(){
+  popup.style.visibility="visible";
+  popupText.innerHTML='<div class="shake">🎁</div><p>Opening gift...</p>';
+
+  setTimeout(()=>{
+    explosion();
+    popupText.innerHTML=
+  "🎁 Melidah's gift loading...<br><br /> chocolate🍫and ice cream🍨for you ml😘💖<br><br><button onclick='closePop()'>❤️❤️</button>";
+  },2000);
+}
+
+/* Explosion effect */
+function explosion(){
+  for(let i=0;i<30;i++){
+    let s=document.createElement("div");
+    s.className="spark";
+    s.innerText=["✨","🎊","💥","⭐"][Math.floor(Math.random()*4)];
+    s.style.left="50vw";
+    s.style.top="50vh";
+
+    let angle=Math.random()*2*Math.PI;
+    let dist=100+Math.random()*80;
+
+    s.style.setProperty("--x",Math.cos(angle)*dist+"px");
+    s.style.setProperty("--y",Math.sin(angle)*dist+"px");
+
+    document.body.appendChild(s);
+    setTimeout(()=>s.remove(),1000);
+  }
+}
+
+function closePop(){
+  popup.style.visibility="hidden";
+}
+</script>
+
+</body>
+</html>
